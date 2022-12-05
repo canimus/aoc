@@ -5,7 +5,7 @@ import numpy as np
 import re
 
 # Input
-raw = Path("test.txt").read_text().split("\n")
+raw = Path("input.txt").read_text().split("\n")
 
 # Clean Data
 clean_fn = compose(first, partial(re.subn, "[\[\]]", " "))
@@ -25,39 +25,45 @@ vertical = []
 for i in range(rows.shape[1]):
     vertical.append(rows[:,i:i+1])
 
-
-global crates
-crates = []
-def reset_crates():    
-    for c in vertical:
-        crates.append(list(reversed(list(filter(lambda x: x != ' ', c.flatten())))))
-
 def move_instruction(s):
     return map(int, first(re.findall(r"move (\d+) from (\d+) to (\d)+", s)))
 
-def move_action(a,b,c):
-    x = crates[b-1]
-    y = crates[c-1]
-    for i in range(a):
-        y.append(x.pop())
+def part1():
+    crates = []
+    for c in vertical:
+        crates.append(list(reversed(list(filter(lambda x: x != ' ', c.flatten())))))    
 
-for m in moves:
-    move_action(*move_instruction(m))
+    def move_action(a,b,c):
+        x = crates[b-1]
+        y = crates[c-1]
+        for i in range(a):
+            y.append(x.pop())
 
-# # P1
-# print("".join(list(map(lambda x: x[-1], crates))))
+    for m in moves:
+        move_action(*move_instruction(m))
 
-# def move_multiple(a,b,c):
-#     x = crates[b-1]
-#     y = crates[c-1]
-#     y += x[len(x)-a:]
-#     [x.pop() for _ in range(a)]
+    # P1
+    print("".join(list(map(lambda x: x[-1], crates))))
 
-# crates = reset_crates()
 
-# # P2
-# for m in moves:
-#     move_multiple(*move_instruction(m))
+def part2():
+    crates = []
+    for c in vertical:
+        crates.append(list(reversed(list(filter(lambda x: x != ' ', c.flatten())))))
 
-# # P2
-# print("".join(list(map(lambda x: x[-1], crates))))
+    def move_multiple(a,b,c):
+        x = crates[b-1]
+        y = crates[c-1]
+        y += x[len(x)-a:]
+        [x.pop() for _ in range(a)]
+
+    # P2
+    for m in moves:
+        move_multiple(*move_instruction(m))
+
+    # P2
+    print("".join(list(map(lambda x: x[-1], crates))))
+
+if __name__ == "__main__":
+    part1()
+    part2()
