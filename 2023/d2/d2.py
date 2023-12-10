@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from toolz import first, valmap, compose
 from typing import List
 from operator import attrgetter as at
+from operator import methodcaller as mc
 
 
 raw = Path("input.txt").read_text().split("\n")
@@ -38,5 +39,11 @@ for row in raw:
     games.append(Game(id, list(map(_draw, draws))))    
 
 
-result = sum(map(at("id"), list(filter(_ok, games))))
-print(result)
+print(sum(map(at("id"), list(filter(_ok, games)))))
+
+
+powers = []
+for g in games:
+    powers.append(np.prod(np.max(np.array(list(map(mc("vector"), g.draws))), axis=0)))
+
+print(sum(powers))
