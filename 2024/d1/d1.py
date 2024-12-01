@@ -24,10 +24,6 @@ def order(pairs: List) -> Tuple[List]:
 
     return tuple([sorted(a), sorted(b)])
 
-def distance(x: int, y: int) -> int:
-    """Absolute distance between points L1"""
-    return abs(y-x)
-
 def similarity(l: np.array, r: np.array) -> int:
     """Search for instances of numbers on left in right and compute score"""
     _item = mc("item")
