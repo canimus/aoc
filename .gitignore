@@ -2,3 +2,7 @@
 **/*.ipynb
 .venv/
 input.txt
+trace/
+trace1/
+trace2/
+**/*.prof

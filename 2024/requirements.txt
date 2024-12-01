@@ -4,3 +4,5 @@ icecream==2.1.3 # printing assistant
 ruff==0.8.1 # code quality
 black==24.10.0 # linting
 radon==6.0.1 # complexity
+snakeviz==2.2.2 # profiling visualization
+viztracer==1.0,0 # performance visualization

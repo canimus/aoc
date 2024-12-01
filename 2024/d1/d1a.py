@@ -1,8 +1,7 @@
 import numpy as np
 from pathlib import Path
 from typing import Tuple, List
-from toolz import compose, first, last, juxt
-from toolz.curried import map as map_curried
+from toolz import compose
 from collections import Counter
 from operator import methodcaller as mc
 
@@ -17,11 +16,13 @@ def split(row: str) -> Tuple[int, int]:
 
 def order(pairs: List) -> Tuple[List]:
     """Order pairs of tuples in sorted lists"""
-    first_list = compose(sorted, map_curried(first))
-    second_list = compose(sorted, map_curried(last))
-    return tuple(
-        juxt(first_list, second_list)(pairs)
-    )
+    a = []
+    b = []
+    for x, y in pairs:
+        a.append(x)
+        b.append(y)
+
+    return tuple([sorted(a), sorted(b)])
 
 
 def similarity(left: np.array, right: np.array) -> int:
@@ -32,10 +33,10 @@ def similarity(left: np.array, right: np.array) -> int:
 
 
 # Ordered Lists
-a, b = map(np.array, order(list(map(split, raw))))
+a, b = map(np.array, order(map(split, raw)))
 
-# Part 1: 1341714
+# Part 1
 print(np.abs(a - b).sum().item())
 
-# Part: 2: 27384707
+# Part: 2
 print(similarity(a, b))
