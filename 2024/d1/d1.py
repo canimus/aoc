@@ -33,10 +33,10 @@ def similarity(left: np.array, right: np.array) -> int:
 
 
 # Ordered Lists
-a, b = map(np.array, order(map(split, raw)))
+a, b = map(np.array, order(list(map(split, raw))))
 
-# Part 1
+# Part 1: 1341714
 ic(np.abs(a - b).sum().item())
 
-# Part: 2
+# Part: 2: 27384707
 ic(similarity(a, b))
