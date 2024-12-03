@@ -29,3 +29,7 @@ Summary
     1.18 ± 0.15 times faster than python d1a.py
     1.18 ± 0.15 times faster than python d1.py
 ```
+
+## 2024-12-03
+- Completed day 3, this one was with `regex` 
+- Dinner was __Chilpachole de Robalo__
