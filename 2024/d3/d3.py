@@ -8,8 +8,6 @@ import chalk
 # %%
 data = (Path(__file__).parent / "input.txt").read_text().split("\n")
 
-# %%
-len(data)
 
 # %%
 _i = lambda x: tuple(map(int, x.split(",")))
@@ -51,8 +49,5 @@ for row in data:
 
 # %%
 print(sum(results))
-
-# %%
-
 
 
