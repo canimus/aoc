@@ -32,4 +32,4 @@ Summary
 
 ## 2024-12-03
 - Completed day 3, this one was with `regex` 
-- Dinner was __Chilpachole de Robalo__
+- Dinner was _Chilpachole de Robalo_
