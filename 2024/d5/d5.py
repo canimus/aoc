@@ -6,7 +6,7 @@ from operator import not_
 from collections import defaultdict, deque
 
 # %%
-raw = Path("input.txt").read_text().split("\n")
+raw = (Path(__file__).parent / "input.txt").read_text().split("\n")
 
 # %%
 rules = list(filter(lambda x: "|" in x, raw))
@@ -43,7 +43,8 @@ entries = [b for a,b in zip(are_valid, page_order) if a]
 
 # %%
 # 5248
-sum([b[a] for a,b in zip(list(map(lambda x: len(x) // 2, entries)), entries)])
+r1 = sum([b[a] for a,b in zip(list(map(lambda x: len(x) // 2, entries)), entries)])
+print("Part 1:", r1)
 
 # %%
 are_invalid = list(map(not_, are_valid))
@@ -54,7 +55,7 @@ entries_invalid = [b for a,b in zip(are_invalid, page_order) if a]
 # %%
 
 
-def sort_with_rules(numbers, rules):
+def sort_with_rules(numbers):
     # Build a graph and in-degree dictionary
     graph = defaultdict(list)
     in_degree = {num: 0 for num in numbers}
@@ -84,21 +85,18 @@ def sort_with_rules(numbers, rules):
     return sorted_list
 
 # Example usage
-#numbers = [30, 20, 10]
-#rules = ["10|20", "20|30"]
 fixed = []
 for e in entries_invalid:
-    fixed.append(sort_with_rules(e, rules))
+    fixed.append(sort_with_rules(e))
 
 
 # %%
-sum([b[a] for a,b in zip(list(map(lambda x: len(x) // 2, fixed)), fixed)])
+r2 = sum([b[a] for a,b in zip(list(map(lambda x: len(x) // 2, fixed)), fixed)])
+print("Part 2:", r2)
 
 # %%
 # 4568 KO => +
 # 4507 OK
-
-# %%
 
 
 
